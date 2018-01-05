@@ -115,3 +115,20 @@ console.log(func(undefined, 2)); //8
    }
  }
  ```
+#### 数组
+ + Array.of()
+ Array.of()方法是为了解决Array构造函数传入一个数值，数组length属性被设定为该值的的问题
+ 
+ ```js
+ //Array构造函数
+ let items = new Array(2);
+ console.log(items.length); //2
+ console.log(items[0]); //undefined
+ console.log(items[1]); //undefined
+ 
+ //Array.of
+ let items = Array.of(2);
+ console.log(items.length); //1
+ console.log(items[0]); //2
+ ```
+ 
