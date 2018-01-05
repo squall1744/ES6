@@ -284,6 +284,7 @@ console.log(func(undefined, 2)); //8
  
  
  + Promise生命周期
+ 
  每个promise都会经历一个短暂的生命周期: 先是进行中(pending)的状态, 此时操作尚未完成, 所以它也是未处理(unsettled)的; 一旦异步操作执行结束, Promise则变为已处理(settled)状态，已处理状态包括fulfilled（已成功）和rejected（已失败）两种情况。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。
  
  一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果，这时就变为我们上面说的已处理(settled)状态。如果改变已经发生了，你再对Promise对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。
@@ -322,10 +323,24 @@ promise.then(function(value) {
 });
 ```
 
-then方法可以接受两个回调函数作为参数。第一个回调函数是Promise对象的状态变为resolved时调用，第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接受Promise对象传出的值作为参数。
+then方法可以接受两个回调函数作为参数。第一个回调函数是Promise对象的状态变为resolved时调用，第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接受Promise对象传出的值作为参数。下面是一个promise实例
  
+```js
+ let promise = new Promise(function(resolve, reject) {
+  console.log('Promise');
+  resolve();
+});
 
- 
+promise.then(function() {
+  console.log('resolved.');
+});
+
+console.log('Hi!');
+
+// Promise
+// Hi!
+// resolved
+```
 
 
  
