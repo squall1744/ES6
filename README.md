@@ -115,7 +115,7 @@ console.log(func(undefined, 2)); //8
    }
  }
  ```
-#### 数组
+#### 数组的扩展
  + Array.of()
  Array.of()方法是为了解决Array构造函数传入一个数值，数组length属性被设定为该值的的问题
  
@@ -131,4 +131,34 @@ console.log(func(undefined, 2)); //8
  console.log(items.length); //1
  console.log(items[0]); //2
  ```
+ + Array.from()
+ Array.from()方法可以接受可迭代对象或者类数组对象作为第一个参数, 最终返回一个数组，第二个参数为一个映射函数，用来将类数组对象中的每一个值转换成其他形式, 最后将结果存储在结果数组的相应索引中
  
+ ```js
+ function translate() {
+  return Array.from(arguments, value => value + 1);
+ }
+ 
+ let numbers = translate(1, 2, 3);
+ 
+ console.log(numbers); //[2,3,4]
+ ```
+ 
+ Array.from()的第三个参数表示映射函数的this值
+ 
+ ```js
+ let helper = {
+  diff: 1,
+  add(value) {
+    return value + this.diff
+  }
+ };
+ 
+ function translate() {
+  return Array.from(arguments, helper.add, helper)
+ }
+ 
+ let numbers = translate(1, 2, 3);
+ 
+ console.log(numbers);
+ ```
