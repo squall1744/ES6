@@ -278,8 +278,51 @@ console.log(func(undefined, 2)); //8
  虽然这个模式很灵活, 运行效果也不错, 但是大家想想, 层层嵌套回调函数, 很快大家就会进入回调地狱中, 把自己搞晕了。另外并行执行两个异步操作时, 当两个操作都结束时通知你; 又或者同时进行两个异步操作, 只取优先完成的结果。这种情况, 你就需要跟踪多个回调函数并清理操作, 而promise就能非常好地改进这种情况。
  
  
+ + Promise的基础知识
+ 
+ Promise的意思就是承诺, 承诺在未来的某个时刻完成函数执行, 它相当于异步操作结果的占位符, 它不会去绑定一个事件, 也不会传递一个回调函数给目标函数, 而是让函数返回一个Promise对象
  
  
+ + Promise生命周期
+ 每个promise都会经历一个短暂的生命周期: 先是进行中(pending)的状态, 此时操作尚未完成, 所以它也是未处理(unsettled)的; 一旦异步操作执行结束, Promise则变为已处理(settled)状态，已处理状态包括fulfilled（已成功）和rejected（已失败）两种情况。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。
+ 
+ 一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果，这时就变为我们上面说的已处理(settled)状态。如果改变已经发生了，你再对Promise对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。
+ 
+ 
+ + 基本用法
+
+Promise对象是一个构造函数，用来生成Promise实例。
+
+下面代码创造了一个Promise实例。
+
+```js
+const promise = new Promise(function(resolve, reject) {
+  // ... some code
+
+  if (/* 异步操作成功 */){
+    resolve(value);
+  } else {
+    reject(error);
+  }
+});
+```
+Promise构造函数接受一个函数作为参数，该函数的两个参数分别是```resolve```和```reject```。它们是两个函数，由 JavaScript 引擎提供，不用自己部署。
+
+resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；
+
+reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+
+Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。
+
+```js
+promise.then(function(value) {
+  // success
+}, function(error) {
+  // failure
+});
+```
+
+then方法可以接受两个回调函数作为参数。第一个回调函数是Promise对象的状态变为resolved时调用，第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接受Promise对象传出的值作为参数。
  
 
  
