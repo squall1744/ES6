@@ -341,6 +341,6 @@ console.log('Hi!');
 // Hi!
 // resolved
 ```
-
+上面代码中，Promise 新建后立即执行，所以首先输出的是Promise。then方法指定的回调函数，将在当前脚本所有同步任务执行完才会执行，所以会先执行Hi, resolved最后输出。
 
  
