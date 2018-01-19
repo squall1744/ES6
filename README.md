@@ -28,7 +28,9 @@ console.log(b);
 */
 
 ```
+
 + API
+
 ```js
 //判断字符串中是否包含某个字符
 let str = 'ddfferrgg';
@@ -38,13 +40,24 @@ str.includes('d'); //true
 //判断字符串是否以某些字母开始或结束
 let str = 'string';
 str.startsWith('str'); //true
-str,endsWith('ng'); //true
+str.endsWith('ng'); //true
 
 
 //重复字符串
 let str = 'abc';
 str.repeat(2); // abcabc
+
+
+//字符串补白(ES7草案)
+console.log('4'.padStart(3, '1')); 114
+console.log('4'.padEnd(5, '0')); 40000
+
+
+//输出字符串模板原始内容, 不转意
+console.log(String.raw`Hi\n${1+2}`) //Hi\n${1+2}
 ```
+
+
 
 --------------------------------------------------------------------------------------------------------------------------------
 #### 函数扩展
