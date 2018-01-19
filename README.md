@@ -355,6 +355,85 @@ console.log(name) //foo
 ```
 
 ---------------------------------------------------------------------------------------------------------------------------------
+
+#### Set-Map
+
+##### set
+set集合内不能有重复的值
++ set集合声明
+
+```js
+//方法1
+let list = new Set();
+list.add(1);
+list.add(2);
+list.add(3);
+
+//方法2
+let list = new Set([1,2,3]);
+```
+
++ API
+add, delete, clear, has
+
++ set的遍历
+```js
+let list = new Set(['a', 'b', 'c'])
+
+//set的key和value一样
+for(let key of list.keys()) {
+  console.log(key) //a b c
+}
+
+for(let value of list.values()) {
+  console.log(value) //a b c
+}
+
+for(let value of list) {
+  console.log(value) //a b c
+}
+
+for(let [key, value] of list.entries()) {
+  console.log(key, value) //a a b b c c
+}
+
+list.forEach(function(item) {
+  console.log(item) //a b c
+})
+```
++ WeakSet
+WeakSet跟Set的区别就是数值类型不同, 只能是对象, 而且对象是地址引用, 并且不检测垃圾回收机制, WeakSet不能遍历
+
+```js
+let weakList = new WeakSet()
+```
+
+##### map
+map集合是一种类似于对象的数据结构, 也是以键值对形式出现的, map的键支持多种数据类型
++ map声明
+
+```js
+//第一种
+let map = new Map()
+let arr=['123']
+
+map.set(arr, 456)
+console.log(map.get(arr)) //456
+
+
+//第二种
+let map = new Map([['a', 123], ['b', 456], ['c', 789]])
+console.log(map) //a=>123  b=>456  c=>789
+```
+
++ API
+跟set差不多, 遍历也一样
+
++ WeakMap
+跟set与WeakSet区别一样
+
+
+---------------------------------------------------------------------------------------------------------------------------------
 #### promise与异步编程
 
  + 异步编程的背景知识
