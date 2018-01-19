@@ -229,7 +229,7 @@ let [a,,,b] = [1,2,3,4] // 1, 4
 
 let [a,b,...rest] = [1,2,3,4,5,6] //1,2,[3,4,5,6]
 ```
-解构赋值的使用场景
+数组解构赋值的使用场景
 
 ```js
 //变量交换
@@ -244,6 +244,82 @@ function f() {
   return [1, 2]
 }
 let [a,b] = f() //1,2
+```
+
++ 对象结构赋值
+
+```js
+let o = {
+  p: 23,
+  q: 'Adam'
+}
+let {p, q} = o //23 Adam
+```
+
+```js
+let o = {
+p:23
+}
+let {p=20, q=45} = o // 23 45
+```
+
+```js
+let o = {
+p: 23,
+q: 'Adam'
+}
+let {p:a, q} = o
+console.log(a, q) //23 Adam
+
+```
+
+对象解构赋值应用
+对象的嵌套
+```js
+let metaData = {
+  title: 'abc',
+  test: [{
+    title: 'test',
+    desc: 'description'
+  }]
+}
+let {title:esTitle, test:[{title:cnTitle}]} = metaData
+console.log(esTitle, cnTitle) //abc test
+```
+
+解构表达式改变值
+```js
+let node = {
+  type: 'Identifier',
+  name: 'foo'
+},
+type = 'Literal',
+name = 5
+
+// 使用解构来分配不同的值
+({type, name} = node)
+
+console.log(type) //Identifier
+console.log(name) //foo
+```
+
+对象解构表达式给函数传参
+```js
+let node = {
+  type: 'Identifier',
+  name: 'foo'
+},
+type = 'Literal',
+name = 5
+
+function outputInfo(value) {
+  console.log(value === node)  //true
+}
+
+outputInfo({type, name} = node)
+
+console.log(type) //Identifier
+console.log(name) //foo
 ```
 
 ---------------------------------------------------------------------------------------------------------------------------------
