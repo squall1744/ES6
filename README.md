@@ -432,6 +432,86 @@ console.log(map) //a=>123  b=>456  c=>789
 + WeakMap
 跟set与WeakSet区别一样
 
++ map与array对比
+
+```js
+//数据的增删查改
+let map = new Map()
+let array = []
+
+//增
+map.set('t', 1)
+array.push({t:1})
+
+//查
+let map_exist = map.has('t') //true
+let array_exist = array.find(item => item.t) //Object{t:1}
+
+//改
+map.set('t', 2)
+array,forEach(item => item.t?item.t=2:'')
+
+//删
+map.delete('t')
+let index=array.findIndex(item => item.t)
+array.splice(index, 1)
+```
+
++ set和array对比
+
+```js
+let set = new Set()
+let array = []
+
+//增
+set.add({t:1})
+array.push({t:1})
+
+//查
+let set_exist = set.has({t:1})
+let array_exsist = array.find(item => item.t)
+
+//改
+set.forEach(item => item.t?item.t = 2 : '')
+array,forEach(item => item.t?item.t=2:'')
+
+//删
+set.forEach(item => item.t?set.delete(item):'')
+let index=array.findIndex(item => item.t)
+array.splice(index, 1)
+```
+
++ map, set与object对比
+
+```js
+let item = {t:1}
+let map = new Map()
+let set = new Set()
+let obj = {}
+
+//增
+map.set('t', 1)
+set.add(item)
+obj['t'] = 1
+
+//查
+let map_exist = map.has('t')
+let set_exist = set.has(item)
+let obj_exist = 't' in obj
+
+//改
+map.set('t', 2)
+item.t = 2
+obj['t'] = 2
+
+//删
+map.delete('t')
+set.delete(item)
+delete obj['t']
+```
+
+
+
 
 ---------------------------------------------------------------------------------------------------------------------------------
 #### promise与异步编程
